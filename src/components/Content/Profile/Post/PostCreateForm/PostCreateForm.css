@@ -1,0 +1,12 @@
+.create-post {
+    display: grid;
+    gap: 5px;
+    margin-left: 5px;
+}
+.btn-send {
+    width: 50px;
+}
+.input-post {
+    width: 25%;
+    height: 60px;
+}

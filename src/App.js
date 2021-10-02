@@ -1,16 +1,16 @@
 import './App.css';
-import Content from './components/Content';
-import Header from './components/Header';
-import Navigation from './components/Navigation';
+import Content from './components/Content/Content';
+import Header from './components/Header/Header';
+import Navigation from './components/Navigation/Navigation';
 
 
 
 function App() {
   return (
     <div className="wrapper">
-      <Header/>
-      <Navigation/>
-      <Content/>
+      <Header />
+      <Navigation />
+      <Content />
     </div>
   );
 }

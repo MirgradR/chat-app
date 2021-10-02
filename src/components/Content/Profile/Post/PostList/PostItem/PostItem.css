@@ -1,0 +1,9 @@
+.item-post {
+    display: grid;
+    grid-template-columns: 1fr 100%;
+    gap: 10px;
+}
+.item-post__avatar {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}

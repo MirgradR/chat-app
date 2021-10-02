@@ -1,4 +1,5 @@
-import logo from '../Rlogo.png'
+import logo from '../../Rlogo.png'
+import './Header.css'
 
 const Header = () => {
     return (

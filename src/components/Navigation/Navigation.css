@@ -1,0 +1,6 @@
+.sidebar {
+    display: grid;
+    background-color: rgb(157, 171, 196);
+    height: 100%;
+    align-content: flex-start;
+}

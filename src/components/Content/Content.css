@@ -1,0 +1,10 @@
+/*  Styles for Content */
+
+.content {
+    padding: 20px;
+}
+.avatar {
+    border-radius: 50%;
+    border: 1px solid #000;
+}
+
