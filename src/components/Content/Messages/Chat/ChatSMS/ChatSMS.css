@@ -1,0 +1,22 @@
+.chat-message {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
+}
+.chat-message__login {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    justify-self: center;
+}
+.chat-message__avatar {
+    justify-self: center;
+}
+.chat-message__text {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: 1px solid #000;
+    border-radius: 15px;
+    padding: 5px 8px;
+}

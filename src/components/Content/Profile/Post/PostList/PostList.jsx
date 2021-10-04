@@ -1,12 +1,14 @@
 import PostItem from './PostItem/PostItem';
 import './PostList.css'
 
-const PostList = () => {
+const PostList = (props) => {
+    const postUsers = props.posts
+    const postItems = postUsers.map(elem => {
+        return <PostItem login={elem.name} text = {elem.post} likes = {elem.likes} key = {elem.id}/>
+    })
     return (
         <div className="post-list profile__post-list">
-            <PostItem login='Mirgrad' text = 'Hey, i am here.'/>
-            <PostItem login='IT-Boss' text = 'Hi, how are you?'/>
-            <PostItem login='Jorick' text = 'And I!'/>
+            {postItems}
         </div>
     );
 }

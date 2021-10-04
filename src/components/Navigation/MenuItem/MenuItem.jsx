@@ -1,8 +1,9 @@
+import { NavLink } from 'react-router-dom';
 import './MenuItem.css'
 
 const MenuItem = (props) => {
     return (
-        <div className="menu-item sidebar__item">{props.item}</div>
+        <NavLink to = {props.link} className = "menu-item sidebar__item">{props.item}</NavLink>
     );
 }
 export default MenuItem

@@ -1,0 +1,41 @@
+{
+    "users": {
+        "Me": {
+            "SMS1": "Hi bro",
+            "SMS2": "How are you",
+            "SMS3": "Good"
+        },
+        "Ivan": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Alex": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Dima": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Roma": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Nikita": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Ksysha": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Jenya": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        },
+        "Jorik": {
+            "SMS1": "Fine",
+            "SMS2": "Ok"
+        }
+    }
+}

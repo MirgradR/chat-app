@@ -1,16 +1,20 @@
+import { Route } from 'react-router';
 import './Content.css'
+import Messages from './Messages/Messages';
 import Profile from './Profile/Profile';
 
-const Content = () => {
-    const user = {
-        login: 'Mirgrad',
-        city: 'Moscow',
-        birth: '2th May',
-        edu: 'KubSAU'
-    }
+const Content = (props) => {
+    const profile = props.data.data
     return (
         <div className="content wrapper__content">
-            <Profile login = {user.login} city = {user.city} birth = {user.birth} edu = {user.edu}/>
+            <Route exact
+                path = '/Profile' 
+                render = { (props) => <Profile {...profile.profileData}/>}  
+            />
+            <Route
+                path='/Messages'
+                render = { (props) => <Messages {...profile.messagesData}/>}
+            />    
         </div>
     );
 }

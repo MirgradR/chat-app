@@ -3,4 +3,6 @@
     background-color: rgb(157, 171, 196);
     height: 100%;
     align-content: flex-start;
+    position: fixed;
+    top: 64px;
 }

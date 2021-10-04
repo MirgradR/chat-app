@@ -1,0 +1,7 @@
+.dialogs-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 10px;
+    justify-items: center;
+    
+}

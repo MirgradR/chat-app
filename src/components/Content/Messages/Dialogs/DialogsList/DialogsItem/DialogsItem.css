@@ -1,0 +1,15 @@
+.dialogs-list__item{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.dialogs-list__item.active{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.466);
+    border-top: 1px solid rgba(0, 0, 0, 0.432);
+    background-color: rgba(0, 0, 0, 0.123);
+    font-size: 18px;
+}
+.dialogs-list__item:hover {
+    background-color: rgba(0, 0, 0, 0.123);
+}
