@@ -3,6 +3,7 @@ import './PostList.css'
 
 const PostList = (props) => {
     const postUsers = props.posts
+    
     const postItems = postUsers.map(elem => {
         return <PostItem login={elem.name} text = {elem.post} likes = {elem.likes} key = {elem.id}/>
     })

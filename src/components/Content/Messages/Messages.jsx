@@ -7,7 +7,7 @@ const Messages = (props) => {
     return (
         <div className = "messages content__messages">
             <Dialogs users = {data.usersList}/>
-            <Chat users = {data.usersList} sms = {data.chatSMS}/>
+            <Chat data = {data} dispatch = {props.dispatch}/>
         </div>
     );
 }

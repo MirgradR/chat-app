@@ -9,11 +9,11 @@ const Content = (props) => {
         <div className="content wrapper__content">
             <Route exact
                 path = '/Profile' 
-                render = { (props) => <Profile {...profile.profileData}/>}  
+                render = { () => <Profile {...profile.profileData} dispatch = {props.dispatch}/>}  
             />
             <Route
                 path='/Messages'
-                render = { (props) => <Messages {...profile.messagesData}/>}
+                render = { () => <Messages {...profile.messagesData} dispatch = {props.dispatch}/>}
             />    
         </div>
     );

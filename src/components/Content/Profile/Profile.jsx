@@ -17,7 +17,7 @@ const Profile = (props) => {
             <div className="personal-info profile__info">
                 {profileInfo}
             </div>
-            <Post posts = {profile.postUsers}/>    
+            <Post posts = {profile} dispatch = {props.dispatch}/>    
         </div>   
     );   
 }

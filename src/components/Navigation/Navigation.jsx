@@ -1,14 +1,14 @@
 import MenuItem from './MenuItem/MenuItem';
 import './Navigation.css'
 
-const Navigation = () => {
+const Navigation = (props) => {
+    const menu = props.menu.navigation
+    const menuList = menu.map(elem => {
+        return <MenuItem item = {elem} link = {'/' + elem} key = {elem}/>
+    })
     return (
         <nav className="sidebar wrapper__sidebar">
-            <MenuItem item = 'Profile' link = '/Profile'/>
-            <MenuItem item = 'Messages' link = '/Messages'/>
-            <MenuItem item = 'News' link = '/News'/>
-            <MenuItem item = 'Music' link = '/Music'/>
-            <MenuItem item = 'Settings' link = '/Settings'/>
+            {menuList}
         </nav>
     );
 }

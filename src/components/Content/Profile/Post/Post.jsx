@@ -6,8 +6,9 @@ const Post = (props) => {
     return (
         <div className="post profile__post">
             <h3 className="post__title">My posts</h3>
-            <CreatePost/>
-            <PostList posts = {props.posts}/>
+            <CreatePost dispatch = {props.dispatch} newPost = {props.posts.newPostText}/>
+            <PostList posts = {props.posts.postUsers}/>
+            
         </div>
     );
 }

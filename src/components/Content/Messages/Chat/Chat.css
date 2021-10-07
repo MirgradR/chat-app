@@ -5,3 +5,21 @@
     padding: 5px;
     padding-left: 10px;
 }
+.input-message {
+    resize: none;
+    padding: 5px;
+    width: 75%;
+    border: 1px solid #000 ;
+    background-color: rgba(117, 116, 116, 0.11);
+}
+.chat__create-message {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    justify-items: end;
+    padding: 30px 5px;
+    margin-top: 10px;
+    border-top: 3px solid #000;
+}
+.message__btn {
+    height: 30px;
+}
