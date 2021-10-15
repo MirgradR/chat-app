@@ -1,13 +1,13 @@
 import './Post.css'
-import CreatePost from './PostCreateForm/PostCreateForm';
 import PostList from './PostList/PostList';
+import CreatePost from './PostCreateForm/PostCreateForm';
 
 const Post = (props) => {
     return (
         <div className="post profile__post">
             <h3 className="post__title">My posts</h3>
-            <CreatePost dispatch = {props.dispatch} newPost = {props.posts.newPostText}/>
-            <PostList posts = {props.posts.postUsers}/>
+            <CreatePost addPost = {props.addPost} newPostText = {props.newPostText}  newPostValue = {props.newPostValue} /> 
+            <PostList posts = {props.posts}/>
             
         </div>
     );

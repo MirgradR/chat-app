@@ -2,6 +2,7 @@ import PostItem from './PostItem/PostItem';
 import './PostList.css'
 
 const PostList = (props) => {
+    
     const postUsers = props.posts
     
     const postItems = postUsers.map(elem => {

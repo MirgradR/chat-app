@@ -1,22 +1,22 @@
 import './PostCreateForm.css'
 import React from 'react'
-import { addPostActionCreator, newPostTextActionCreator } from '../../../../../redux/state'
 
 const CreatePost = (props) => {
     let inputText = React.createRef()
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
-        inputText.current.value = ''
+        if (inputText.current.value) {
+            props.addPost()
+        }
     }
 
     const newPostText = () => {
-        props.dispatch(newPostTextActionCreator(inputText.current.value)) 
+        props.newPostText(inputText.current.value)
     }
     
     return (
         <form className="create-post">
-            <textarea type="text" value = {props.newPostText} onChange = {newPostText} className="input-post" ref = {inputText}/>
+            <textarea type="text" value = {props.newPostValue} onChange = {newPostText} className="input-post" ref = {inputText}/>
             <button type = 'button' className="btn-send post__btn" onClick = {addPost}>Send</button>
         </form>
     );

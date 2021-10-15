@@ -1,0 +1,19 @@
+.friends__list-item {
+    display: grid;
+    grid-template-columns: 80px auto;
+    column-gap: 25px;
+}
+.friends__list-item img {
+    justify-self: center;
+    margin-bottom: 10px;
+}
+.list-item__description {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: auto 10%;
+    max-width: 400px;
+    margin-right: 15px;
+}

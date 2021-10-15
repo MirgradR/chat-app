@@ -9,8 +9,8 @@ function App(props) {
     <BrowserRouter>
       <div className="wrapper">
         <Header />
-        <Navigation menu = {props.data}/>
-        <Content data = {props} dispatch = {props.dispatch}/>
+        <Navigation menu = {props.state}/>
+        <Content state = {props} dispatch = {props.dispatch} store = {props.store} />
       </div>
     </BrowserRouter>
 

@@ -1,18 +1,19 @@
 import React from 'react';
-import { addMessageActionCreator, newMessageTextActionCreator } from '../../../../redux/state';
 import './Chat.css'
 import ChatSMS from './ChatSMS/ChatSMS';
 
 const Chat = (props) => {
-    let inputMessage = React.createRef()
 
+    let inputMessage = React.createRef()
+    
     const addMessage = () => {
-        props.dispatch(addMessageActionCreator())
-        inputMessage.current.value = ''
+        if (inputMessage.current.value) {
+            props.addMessage()
+        }
     }
 
     const newMessageText = () => {
-        props.dispatch(newMessageTextActionCreator(inputMessage.current.value))
+        props.newMessageText(inputMessage.current.value)
     }
 
     const users = props.data.usersList
@@ -25,7 +26,7 @@ const Chat = (props) => {
         <div className = "chat messages__chat">
             {chatItems}
             <div className = "chat__create-message">
-                <textarea onChange = {newMessageText} ref = {inputMessage} type="text" className="input-message" />
+                <textarea value = {props.newMessageValue} onChange = {newMessageText} ref = {inputMessage} type="text" className="input-message" />
                 <button onClick = {addMessage} className="btn-send message__btn">Send</button>
             </div>
         </div>
