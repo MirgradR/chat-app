@@ -3,3 +3,23 @@
     display: grid;
     gap: 30px;
 }
+.friends {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pagination-pages {
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-self: center;
+}
+.pagination-pages__value {
+    padding: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.pagination-pages__value.selected{
+    background-color: rgba(0, 0, 0, 0.308);
+}

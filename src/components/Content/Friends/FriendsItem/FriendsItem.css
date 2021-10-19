@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: 80px auto;
     column-gap: 25px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 15px;
 }
 .friends__list-item img {
     justify-self: center;
@@ -13,7 +15,13 @@
     grid-row-start: 1;
     grid-row-end: 3;
     display: grid;
-    grid-template-columns: auto 10%;
-    max-width: 400px;
+    grid-template-columns: auto 160px;
+    max-width: 500px;
     margin-right: 15px;
+}
+.list-item__following {
+    cursor: pointer;
+}
+.list-item__following:hover {
+    background-color: rgba(68, 67, 67, 0.212);
 }

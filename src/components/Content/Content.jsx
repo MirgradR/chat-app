@@ -1,6 +1,6 @@
 import { Route } from 'react-router';
 import './Content.css'
-import Friends from './Friends/Friends';
+import FriendsContainer from './Friends/FriendsContainer';
 import Messages from './Messages/Messages';
 import Profile from './Profile/Profile';
 
@@ -18,7 +18,7 @@ const Content = (props) => {
             />   
             <Route
                 path='/Friends'
-                render={() => <Friends />}
+                render={() => <FriendsContainer />}
             />
         </div>
     );
