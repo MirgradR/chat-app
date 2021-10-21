@@ -1,9 +1,12 @@
-.friends__list-item {
+.friends__list-item a{
     display: grid;
     grid-template-columns: 80px auto;
     column-gap: 25px;
     border-bottom: 1px solid #000;
     padding-bottom: 15px;
+}
+.friends__list-item:hover{
+    background-color: rgba(0, 0, 0, 0.116);
 }
 .friends__list-item img {
     justify-self: center;

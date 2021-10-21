@@ -1,0 +1,12 @@
+.profile-info {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+}
+.profile__avatar {
+    margin-right: 15px;
+}
+.personal-info__item-contacts {
+    border-top: 1px solid #000;
+    margin-top: 15px;
+    padding-top: 15px;
+}

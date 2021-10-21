@@ -23,6 +23,9 @@ body, #root {
 .logo {
   width: 60px;
 }
+button {
+  cursor: pointer;
+}
 
 
 

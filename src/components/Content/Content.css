@@ -10,4 +10,11 @@
     border-radius: 50%;
     border: 1px solid #000;
 }
-
+.preloader {
+    width: 200px;
+    margin: auto auto;
+}
+div .preloader {
+    display: block;
+    margin-top: 200px;
+}

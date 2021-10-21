@@ -5,7 +5,7 @@ const DialogsItem = (props) => {
     const users = props.user
     const id = props.idU
     return (
-        <NavLink to = {"/Messages/" + id} className = "dialogs-list__item">{users}</NavLink>
+        <NavLink to = {"/Content/Messages/" + id} className = "dialogs-list__item">{users}</NavLink>
     );
 }
 export default DialogsItem

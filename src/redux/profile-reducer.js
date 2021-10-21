@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST'
 const NEW_POST_CREATE = 'NEW-POST-CREATE'
+const SET_PROFILE_INFO = 'SET-PROFILE-INFO'
 
 let initialState = {
     postUsers: [
@@ -9,13 +10,7 @@ let initialState = {
         { post: 'Haha', id: 4, likes: 8, name: 'Masha' },
         { post: 'Haha', id: 5, likes: 3, name: 'Igor' }
     ],
-    profileInfo: [
-        { Login: 'Mirgrad' },
-        { Job: 'Frontend' },
-        { City: 'Moscow' },
-        { Birth: '2th May' },
-        { Education: 'KubSAU' }
-    ],
+    profileInfo: null,
     newPostText: ''
 }
 
@@ -34,6 +29,10 @@ export const profileReducer = (state = initialState, action) => {
                 newPostText: '',
                 postUsers: [...state.postUsers, {post: newPost, id: 6, likes: 0, name: 'Ruslan'}]
             }
+        case SET_PROFILE_INFO:
+            return {
+                ...state, profileInfo: action.profileInfo
+            }
         default: 
             return state
     }
@@ -51,3 +50,17 @@ export const newPostTextActionCreator = (text) => {
         text: text,
     }
 }
+
+export const setProfileInfoAC = (profileInfo) => {
+    return {
+        type: SET_PROFILE_INFO,
+        profileInfo: profileInfo,
+    }
+}
+
+
+// { Login: 'Mirgrad' },
+// { Job: 'Frontend' },
+// { City: 'Moscow' },
+// { Birth: '2th May' },
+// { Education: 'KubSAU' }

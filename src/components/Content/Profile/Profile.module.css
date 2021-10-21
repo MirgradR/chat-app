@@ -1,16 +1,11 @@
 .profile {
     display: grid;
-    grid-template-columns: 10% 2fr 1fr;
+    grid-template-columns: 80%;
     gap: 30px; 
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 700px) {
     .profile {
-        grid-template-columns: 10% 2fr 10%;
-    }
-}
-@media(max-width: 860px) {
-    .profile {
-        grid-template-columns: 15% 2fr;
+        grid-template-columns: 95%;
     }
 }
