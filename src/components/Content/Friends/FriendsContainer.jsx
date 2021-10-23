@@ -1,20 +1,19 @@
 import { connect } from "react-redux";
-import { followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, toggleIsFetchingCountAC, unfollowAC } from "../../../redux/friends-reducer";
-import * as axios from 'axios'
+import { followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, toggleFollowingProgressAC, toggleIsFetchingCountAC, unfollowAC } from "../../../redux/friends-reducer";
 import React from 'react'
 import Friends from './Friends'
 import Preloader from "../../Common/Preloader/Preloader";
+import { getUsers } from "../../../api/api";
 
 class FriendsAPI extends React.Component {
     
     componentDidMount() { 
             this.props.toggleIsFetchingCount(true)
-            axios
-                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-                .then(data => {
+
+            getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                     this.props.toggleIsFetchingCount(false)
-                    this.props.setUsers(data.data.items)
-                    this.props.setTotalUsersCount(data.data.totalCount)
+                    this.props.setUsers(data.items)
+                    this.props.setTotalUsersCount(data.totalCount)
                     
                 })
     }
@@ -22,11 +21,10 @@ class FriendsAPI extends React.Component {
     setCurrentPage = (p) => {
         this.props.toggleIsFetchingCount(true)
         this.props.setCurrentPage(p)
-        axios
-        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
-        .then(data => {
+
+        getUsers(p, this.props.pageSize).then(data => {
             this.props.toggleIsFetchingCount(false)
-            this.props.setUsers(data.data.items)   
+            this.props.setUsers(data.items)   
         })
     }
     
@@ -41,7 +39,9 @@ class FriendsAPI extends React.Component {
                     users={this.props.users}
                     followUser={this.props.followUser}
                     unfollowUser={this.props.unfollowUser}
-                    setUsers={this.props.setUsers} />}
+                    setUsers={this.props.setUsers}
+                    toggleFollowingProgress = {this.props.toggleFollowingProgress}
+                    followingProgress = {this.props.followingProgress} />}
 
             </div>
 
@@ -56,7 +56,8 @@ const mapStateToProps = (state) => {
         pageSize: state.friendsData.pageSize,
         totalUsersCount: state.friendsData.totalUsersCount,
         currentPage: state.friendsData.currentPage,
-        isFetching: state.friendsData.isFetching
+        isFetching: state.friendsData.isFetching,
+        followingProgress: state.friendsData.followingProgress
     }
 }
 
@@ -89,7 +90,8 @@ const FriendsContainer = connect(mapStateToProps, {
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalUsersCountAC,
-    toggleIsFetchingCount: toggleIsFetchingCountAC
+    toggleIsFetchingCount: toggleIsFetchingCountAC,
+    toggleFollowingProgress: toggleFollowingProgressAC
     }) (FriendsAPI)
 
 export default FriendsContainer

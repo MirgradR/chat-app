@@ -47,7 +47,9 @@ const Friends = (props) => {
                             followUser={props.followUser}
                             unfollowUser={props.unfollowUser}
                             setUsers={props.setUsers}
-                            key={s.id} />
+                            key={s.id}
+                            toggleFollowingProgress = {props.toggleFollowingProgress}
+                            followingProgress = {props.followingProgress}  />
                     })}
                 </ul>
             </div> 

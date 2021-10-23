@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: 80px auto;
     column-gap: 25px;
+}
+.friends__list-item {
     border-bottom: 1px solid #000;
     padding-bottom: 15px;
 }
@@ -23,6 +25,7 @@
     margin-right: 15px;
 }
 .list-item__following {
+    margin-left: 15px;
     cursor: pointer;
 }
 .list-item__following:hover {

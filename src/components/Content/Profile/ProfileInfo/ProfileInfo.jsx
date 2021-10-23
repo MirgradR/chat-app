@@ -19,7 +19,7 @@ const ProfileInfo = (props) => {
     let contacts = contactsArr.map(c => {
         return <h3 className="personal-info__item" key={Math.floor(Math.random() * 1000)}>{c}</h3>
     })
-    // profile.photos.small ? profile.photos.small : 
+    
     return (
         <div className='profile-info'>
             <img src={profile.photos.small ? profile.photos.small : logo} alt="logo" className="logo avatar profile__avatar" />
