@@ -10,3 +10,9 @@
     margin-top: 15px;
     padding-top: 15px;
 }
+.personal-info {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: column;
+}

@@ -1,7 +1,10 @@
 import logo from '../../../../Rlogo.png'
 import Preloader from '../../../Common/Preloader/Preloader'
 import './ProfileInfo.css'
+import ProfileStatusHooks from './ProfileStatus/ProfileStatusHOOKS'
+
 const ProfileInfo = (props) => {
+    
     const profile = props.profileInfo
     
     if (!profile) {
@@ -25,6 +28,7 @@ const ProfileInfo = (props) => {
             <img src={profile.photos.small ? profile.photos.small : logo} alt="logo" className="logo avatar profile__avatar" />
             <div className="personal-info profile__info">
                 <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{profile.fullName}</h3>
+                <ProfileStatusHooks status ={props.status} updateStatus = {props.updateStatus} />
                 <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{profile.aboutMe}</h3>
                 <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{profile.lookingForAJob ? 'I am looking for a job' : 'I have a job'}</h3>
                 <div className = 'personal-info__item-contacts'>
@@ -36,12 +40,3 @@ const ProfileInfo = (props) => {
     )
 }
 export default ProfileInfo
-
-
-// const profileInfo = profile.map(elem => {
-//     let item
-//     for (let key in elem) {
-//         item = key + ': ' + elem[key]
-//     }
-//     return <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{item}</h3>
-// })

@@ -1,5 +1,4 @@
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const NEW_MESSAGE_CREATE = 'NEW-MESSAGE-CREATE'
+const ADD_MESSAGE = 'MESSAGES/ADD-MESSAGE'
 
 let initialState = {
     usersList: [
@@ -15,26 +14,17 @@ let initialState = {
         { text: 'Hi', id: 1 },
         { text: 'Good', id: 2 },
         { text: 'How are you', id: 3 },
-        { text: 'Haha', id: 4 },
-        
+        { text: 'Haha', id: 4 },   
     ],
-    newMessageText: ''
 }
 
 export const messagesReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case NEW_MESSAGE_CREATE: 
-            return {
-                ...state,
-                newMessageText: action.text
-            } 
         case ADD_MESSAGE: 
-            if (!state.newMessageText) return
-            let newMessage = state.newMessageText
+            let newMessage = action.newMessage
             return {
                 ...state,
-                newMessageText: '',
                 chatSMS: [...state.chatSMS, {text: newMessage, id: 6}]
             }
         default: 
@@ -42,15 +32,9 @@ export const messagesReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = () => {
+export const addMessageActionCreator = (newMessage) => {
     return {
-        type: ADD_MESSAGE
-    }
-}
-
-export const newMessageTextActionCreator = (text) => {
-    return {
-        type: NEW_MESSAGE_CREATE,
-        text: text,
+        type: ADD_MESSAGE,
+        newMessage: newMessage
     }
 }

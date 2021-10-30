@@ -1,24 +1,47 @@
 import { Route } from 'react-router';
 import './Content.css'
-import FriendsContainer from './Friends/FriendsContainer';
-import Messages from './Messages/Messages';
-import ProfileContainer from './Profile/ProfileContainer';
+import React from 'react';
+import Preloader from '../Common/Preloader/Preloader';
+
+const LoginContainer = React.lazy(() => import('./Login/LoginContainer') )
+const FriendsContainer = React.lazy(() => import('./Friends/FriendsContainer') )
+const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer') )
+const MessagesContainer = React.lazy(() => import('./Messages/MessagesContainer') )
 
 const Content = (props) => {
-    const profile = props.state.state
     return (
         <div className="content wrapper__content">
-            <Route 
-                path = '/Content/Profile/:userId?' 
-                render = { () => <ProfileContainer />}  
+            <Route
+                path='/Content/Profile/:userId?'
+                render={() => {
+                    return <React.Suspense fallback={<div><Preloader/></div>}>
+                        <ProfileContainer />
+                    </React.Suspense>
+                }}
             />
             <Route
                 path='/Content/Messages'
-                render = { () => <Messages {...profile.messagesData} dispatch = {props.dispatch} store = {props.store} />}
-            />   
+                render={() => {
+                    return <React.Suspense fallback={<div><Preloader/></div>}>
+                        <MessagesContainer />
+                    </React.Suspense>
+                }}
+            />
             <Route
                 path='/Content/Friends'
-                render={() => <FriendsContainer />}
+                render={() => {
+                    return <React.Suspense fallback={<div><Preloader /></div>}>
+                        <FriendsContainer />
+                    </React.Suspense>
+                }}
+            />
+            <Route
+                path='/Content/Login'
+                render={() => {
+                    return <React.Suspense fallback={<div><Preloader /></div>}>
+                        <LoginContainer />
+                    </React.Suspense>
+                }}
             />
         </div>
     );

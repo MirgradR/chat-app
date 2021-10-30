@@ -1,0 +1,14 @@
+.profile-status__title {
+    cursor: pointer;
+}
+.profile-status__create,
+.profile-status__title {
+    border: 1px solid #000;
+    padding: 3px;
+}
+.personal-info__status {
+    margin-bottom: 10px;
+}
+.profile-status__create {
+    font-size: 18px;
+}

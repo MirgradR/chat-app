@@ -1,6 +1,8 @@
-const ADD_POST = 'ADD-POST'
-const NEW_POST_CREATE = 'NEW-POST-CREATE'
-const SET_PROFILE_INFO = 'SET-PROFILE-INFO'
+import { profileAPI } from "../api/api"
+
+const ADD_POST = 'PROFILE/ADD-POST'
+const SET_PROFILE_INFO = 'PROFILE/SET-PROFILE-INFO'
+const GET_STATUS = 'PROFILE/GET-STATUS'
 
 let initialState = {
     postUsers: [
@@ -11,43 +13,35 @@ let initialState = {
         { post: 'Haha', id: 5, likes: 3, name: 'Igor' }
     ],
     profileInfo: null,
-    newPostText: ''
+    isFetching: false,
+    status: ''
 }
 
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_POST_CREATE: 
-            return {
-                ...state,
-                newPostText: action.text
-            }
         case ADD_POST: 
-            if (!state.newPostText) return state
-            let newPost = state.newPostText
+            let newPost = action.newPost
             return {
                 ...state,
-                newPostText: '',
                 postUsers: [...state.postUsers, {post: newPost, id: 6, likes: 0, name: 'Ruslan'}]
             }
         case SET_PROFILE_INFO:
             return {
                 ...state, profileInfo: action.profileInfo
             }
+        case GET_STATUS:
+            return {
+                ...state, status: action.status
+            }
         default: 
             return state
     }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPost) => {
     return {
-        type: ADD_POST
-    }
-}
-
-export const newPostTextActionCreator = (text) => {
-    return {
-        type: NEW_POST_CREATE,
-        text: text,
+        type: ADD_POST,
+        newPost: newPost
     }
 }
 
@@ -58,9 +52,40 @@ export const setProfileInfoAC = (profileInfo) => {
     }
 }
 
+export const getProfileStatusAC = (status) => {
+    return {
+        type: GET_STATUS,
+        status: status
+    }
+}
 
-// { Login: 'Mirgrad' },
-// { Job: 'Frontend' },
-// { City: 'Moscow' },
-// { Birth: '2th May' },
-// { Education: 'KubSAU' }
+export const setProfileInfoThunkCreator = (userID, myProfile) => {
+    return async (dispatch) => {
+        let showUserByID = userID
+        if (!showUserByID) {
+            showUserByID = myProfile
+        }
+        let data = await profileAPI.getProfileInfo(showUserByID)
+        dispatch(setProfileInfoAC(data))
+    }
+}
+
+export const getProfileStatusThunkCreator = (userID, myProfile) => {
+    return async (dispatch) => {
+        let showUserByID = userID
+        if (!showUserByID) {
+            showUserByID = myProfile
+        }
+        let data = await profileAPI.getStatus(showUserByID)
+        dispatch(getProfileStatusAC(data))
+    }
+}
+export const updateProfileStatusThunkCreator = (status) => {
+    return async (dispatch) => {
+        let data = await profileAPI.updateStatus(status)
+        if (data.data.resultCode === 0) {
+            dispatch(getProfileStatusAC(status))
+        }
+    }
+}
+

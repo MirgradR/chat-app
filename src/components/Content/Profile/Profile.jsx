@@ -1,4 +1,4 @@
-import PostContainer from './Post/PostContainer';
+import Post from './Post/Post';
 import Pro from './Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
@@ -6,8 +6,8 @@ const Profile = (props) => {
     
     return (
         <div className={Pro.profile}>
-            <ProfileInfo profileInfo = {props.profileInfo} props = {props} />
-            <PostContainer />    
+            <ProfileInfo profileInfo = {props.profileInfo} updateStatus = {props.updateStatus} status = {props.status} />
+            <Post  addPost = {props.addPost} posts = {props.posts} />    
         </div>   
     );   
 }

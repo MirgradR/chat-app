@@ -1,34 +1,57 @@
 import Profile from "./Profile";
 import React from "react";
 import { connect } from "react-redux";
-import { setProfileInfoAC } from "../../../redux/profile-reducer";
+import { addPostActionCreator, getProfileStatusThunkCreator, setProfileInfoThunkCreator, updateProfileStatusThunkCreator } from "../../../redux/profile-reducer";
 import { withRouter } from "react-router";
-import { getProfileInfo } from "../../../api/api";
+import { WithAuthRedirect } from "../../../HOC/WithAuthRedirect";
+import { compose } from "redux";
 
 
 class ProfileContainer extends React.Component {
-    
-    componentDidMount () {
-        let userID = this.props.match.params.userId
-        if (!userID) {
-            userID = this.props.auth.userId
-        }
 
-        getProfileInfo(userID).then(data => this.props.setProfileInfo(data))
+    componentDidMount() {
+        this.props.setProfileInfo(this.props.match.params.userId, this.props.auth.userId)
+        this.props.getProfileStatus(this.props.match.params.userId, this.props.auth.userId)
     }
 
-    render () {
+    render() {
         return (
-            <Profile {...this.props} profileInfo = {this.props.profileInfo} />
+            <div>
+                <Profile
+                    profileInfo={this.props.profileInfo}
+                    status={this.props.status}
+                    updateStatus={this.props.updateProfileStatus}
+                    posts = {this.props.posts}
+                    auth = {this.props.auth}
+                    addPost = {this.props.addPost}
+                />
+            </div>
         )
     }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state) => ({    
     profileInfo: state.profileData.profileInfo,
-    auth: state.auth
+    auth: state.auth,
+    status: state.profileData.status,
+    posts: state.profileData.postUsers
 })
 
-let UrlDataContainer = withRouter(ProfileContainer)
+export default compose (
+    connect(mapStateToProps, {setProfileInfo: setProfileInfoThunkCreator, 
+        getProfileStatus: getProfileStatusThunkCreator, 
+        updateProfileStatus: updateProfileStatusThunkCreator,
+        addPost: addPostActionCreator,
+    }),
+    withRouter,
+    WithAuthRedirect) (ProfileContainer)
 
-export default connect(mapStateToProps, {setProfileInfo: setProfileInfoAC}) (UrlDataContainer)
+
+
+
+
+// let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
+
+// let UrlDataContainer = withRouter(AuthRedirectComponent)
+
+// export default connect(mapStateToProps, {setProfileInfo: setProfileInfoThunkCreator}) (UrlDataContainer)

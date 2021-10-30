@@ -1,20 +1,47 @@
+import React from 'react';
+import { connect, Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import Preloader from './components/Common/Preloader/Preloader';
 import Content from './components/Content/Content';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Navigation from './components/Navigation/Navigation';
+import NavigationContainer from './components/Navigation/NavigationContainer';
+import { initializeThunkCreator } from './redux/app-initial-reducer';
+import store from './redux/redux-store';
 
-function App(props) {
-  return (
-    <BrowserRouter>
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initialize()
+  }
+  
+  render() {
+    if (!this.props.initialized) {
+      return <Preloader />
+    }
+    return (
       <div className="wrapper">
         <HeaderContainer />
-        <Navigation menu = {props.state}/>
-        <Content state = {props} dispatch = {props.dispatch} store = {props.store} />
+        <NavigationContainer />
+        <Content />
       </div>
-    </BrowserRouter>
-
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
+
+let AppContainer = connect(mapStateToProps, { initialize: initializeThunkCreator })(App)
+
+const AppMain = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+export default AppMain
+

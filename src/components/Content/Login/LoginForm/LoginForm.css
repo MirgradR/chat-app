@@ -1,0 +1,33 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    
+}
+.login-form>.form-control>input {
+    margin-bottom: 10px;
+    padding: 8px 5px;
+    width: 100%;
+}
+.form-rememberMe {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.login-form__rememberMe-checkbox {
+    margin-right: 10px;
+}
+.btn-login {
+    align-self: center;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+.btn-login:hover {
+    background-color: rgba(0, 0, 0, 0.144);
+}
+.login-form__password {
+    margin-top: 10px;
+}

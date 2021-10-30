@@ -1,10 +1,12 @@
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET-USERS'
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
-const  SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT' 
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
-const FOLLOWING_PROGRESS = 'FOLLOWING-PROGRESS'
+import { friendsAPI} from "../api/api"
+
+const FOLLOW = 'FRIENDS/FOLLOW'
+const UNFOLLOW = 'FRIENDS/UNFOLLOW'
+const SET_USERS = 'FRIENDS/SET-USERS'
+const SET_CURRENT_PAGE = 'FRIENDS/SET-CURRENT-PAGE'
+const  SET_TOTAL_USERS_COUNT = 'FRIENDS/SET-TOTAL-USERS-COUNT' 
+const TOGGLE_IS_FETCHING = 'FRIENDS/TOGGLE-IS-FETCHING'
+const FOLLOWING_PROGRESS = 'FRIENDS/FOLLOWING-PROGRESS'
 
 let initialState = {
     users: [],
@@ -15,28 +17,27 @@ let initialState = {
     followingProgress: []
 };
 
+const updateObjectInArray = (items, itemID, objPropName, newObjProps) => {
+    return items.map(u => {
+        if (u[objPropName] === itemID) {
+            return {...u, ...newObjProps}
+        }
+        return u
+    })
+}
+
 export const friendsReducer = (state = initialState, action) => {
     
     switch (action.type) {
         case FOLLOW:
             return {
                 ...state, 
-                users: state.users.map(s => {
-                    if (s.id === action.id) {
-                        return {...s, followed: true}
-                    }
-                    return s
-                })
+                users: updateObjectInArray(state.users, action.id, 'id', {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state, 
-                users: state.users.map(s => {
-                    if (s.id === action.id) {
-                        return {...s, followed: false}
-                    }
-                    return s
-                })
+                users: updateObjectInArray(state.users, action.id, 'id', {followed: false})
             }
         case SET_USERS:
             return {...state, users:  [...action.users]}
@@ -101,6 +102,36 @@ export const toggleFollowingProgressAC = (followingProgress, userID) => {
     }
 }
 
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return async (dispatch) => {
+        dispatch(toggleIsFetchingCountAC(true))
+        let data = await friendsAPI.getUsers(currentPage, pageSize)
+        dispatch(toggleIsFetchingCountAC(false))
+        dispatch(setUsersAC(data.items))
+        dispatch(setTotalUsersCountAC(data.totalCount))
+    }
+}
+
+const followUnfollow = async (dispatch, userID, actionCreator, apiMethon) => {
+    dispatch(toggleFollowingProgressAC(true, userID))
+    let data = await apiMethon(userID)
+    if (data.resultCode === 0) {
+        dispatch(actionCreator(userID))
+    }
+    dispatch(toggleFollowingProgressAC(false, userID))
+}
+
+export const followUserThunkCreator = (userID) => {
+    return async (dispatch) => {
+        followUnfollow(dispatch, userID, followAC, friendsAPI.followUser.bind(friendsAPI))
+    }
+}
+
+export const unFollowUserThunkCreator = (userID) => {
+    return async (dispatch) => {
+        followUnfollow(dispatch, userID, unfollowAC, friendsAPI.unFollowUser.bind(friendsAPI))
+    }
+}
 
 
 

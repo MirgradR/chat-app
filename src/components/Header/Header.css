@@ -9,11 +9,17 @@
     justify-content: space-between;
     align-items: center;
 }
-.header__login {
+.header__login-userName,
+.header__login-logout {
     margin-right: 30px;
     border: 1px solid black;
     padding: 5px;
 }
-.header__login:hover {
+.header__login-userName:hover,
+.header__login-logout:hover {
     background-color: rgba(0, 0, 0, 0.178);
+}
+.header__login-login {
+    border: 1px solid black;
+    padding: 5px;
 }

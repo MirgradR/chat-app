@@ -1,29 +1,15 @@
 import './FriendsItem.css'
 import avatar from './../../../../Rlogo.png'
 import { NavLink } from 'react-router-dom'
-import { followUserAPI, unFollowUserAPI } from '../../../../api/api'
 
 const FriendsItem = (props) => {
     
     const followUser = () => {
-        props.toggleFollowingProgress(true, props.users.id)
-        followUserAPI(props.users.id).then(data => {
-            if (data.resultCode === 0) {
-                props.followUser(props.users.id)
-            }
-            props.toggleFollowingProgress(false, props.users.id)
-        })
+        props.followUser(props.users.id)
     }
 
     const unfollowUser = () => {
-        props.toggleFollowingProgress(true, props.users.id)
-        unFollowUserAPI(props.users.id).then(data => {
-            if (data.resultCode === 0) {
-               props.unfollowUser(props.users.id) 
-            }
-            props.toggleFollowingProgress(false, props.users.id)
-        })  
-        
+        props.unfollowUser(props.users.id)
     }
 
     return (
@@ -32,14 +18,7 @@ const FriendsItem = (props) => {
                 <img src={props.users.photos.small ? props.users.photos.small : avatar} alt='avatar' className='logo avatar' />
                 <div className='list-item__description'>
                     <h2 className='description-login'>{props.users.name}</h2>
-                    <div className='description-location'>
-                        <h4 className='description-location__country'>
-                            {/* {'props.users.location.country'} */}
-                        </h4>
-                        <h4 className='description-location__city'>
-                            {/* {'props.users.location.city'}  */}
-                        </h4>
-                    </div>
+                    <div className = {'location'}></div>
                     <p className='description-greeting'>{props.users.status}</p>
                 </div>
             </NavLink>
