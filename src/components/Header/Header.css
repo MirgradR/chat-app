@@ -22,4 +22,8 @@
 .header__login-login {
     border: 1px solid black;
     padding: 5px;
+    cursor: default;
+}
+.header__login-logout {
+    cursor: pointer;
 }

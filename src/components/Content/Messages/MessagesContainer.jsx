@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { WithAuthRedirect } from '../../../HOC/WithAuthRedirect';
 import { addMessageActionCreator } from '../../../redux/messages-reducer';
 import Messages from './Messages';
 import './Messages.css'
@@ -10,6 +12,8 @@ const mapStateToProps = (state) => {
     }  
 }
 
-const MessagesContainer = connect(mapStateToProps, {addMessage: addMessageActionCreator}) (Messages)
+export default compose(
+    connect(mapStateToProps, {addMessage: addMessageActionCreator}),
+    WithAuthRedirect
+) (Messages)
 
-export default MessagesContainer

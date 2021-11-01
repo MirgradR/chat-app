@@ -7,23 +7,25 @@ import Login from "./Login"
 class LoginContainer extends React.Component {
 
     onSubmit = (formData) => {
-        this.props.login(formData.login, formData.password, formData.rememberMe)
+        this.props.login(formData.login, formData.password, formData.rememberMe, formData.captcha)
     }
     render() {
         if (this.props.isAuth) {
             return <Redirect to = {'/content/profile'} />
         }
         return (
-            <Login onSubmit = {this.onSubmit} props = {this.props} />
+            <Login onSubmit = {this.onSubmit} captchaUrl = {this.props.captchaUrl} />
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 
-const FriendsContainer = connect(mapStateToProps, {login: login, logout: logout} ) (LoginContainer)
-export default FriendsContainer
+
+const LoginContainerF = connect(mapStateToProps, {login: login, logout: logout} ) (LoginContainer)
+export default LoginContainerF 

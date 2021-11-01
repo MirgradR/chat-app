@@ -10,8 +10,15 @@ export const requeiredField = value => {
 
 
 export const maxLengthCreator = (maxLength) => (value) => {
-    if (value.length > maxLength) {
-        return `Max length is ${maxLength}` 
+    
+    if (value) {
+        if (value.length > maxLength) {
+            return `Max length is ${maxLength}`
+        }
+        return undefined
+    } else {
+        
     }
-    return undefined
+
+    
 }

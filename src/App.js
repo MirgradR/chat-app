@@ -10,6 +10,7 @@ import { initializeThunkCreator } from './redux/app-initial-reducer';
 import store from './redux/redux-store';
 
 class App extends React.Component {
+
   componentDidMount() {
     this.props.initialize()
   }
@@ -36,7 +37,7 @@ let AppContainer = connect(mapStateToProps, { initialize: initializeThunkCreator
 
 const AppMain = (props) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename = {process.env.PUBLIC_URL}>
       <Provider store={store}>
         <AppContainer />
       </Provider>

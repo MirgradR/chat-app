@@ -1,8 +1,10 @@
+import { stopSubmit } from "redux-form"
 import { profileAPI } from "../api/api"
 
 const ADD_POST = 'PROFILE/ADD-POST'
 const SET_PROFILE_INFO = 'PROFILE/SET-PROFILE-INFO'
 const GET_STATUS = 'PROFILE/GET-STATUS'
+const UPDATE_PHOTO = 'PROFILE/UPDATE-PHOTO'
 
 let initialState = {
     postUsers: [
@@ -33,6 +35,10 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state, status: action.status
             }
+        case UPDATE_PHOTO:
+            return {
+                ...state, profileInfo: {...state.profileInfo, photos: action.photo}
+            }
         default: 
             return state
     }
@@ -56,6 +62,13 @@ export const getProfileStatusAC = (status) => {
     return {
         type: GET_STATUS,
         status: status
+    }
+}
+
+export const updatePhotoActionCreator = (photo) => {
+    return {
+        type: UPDATE_PHOTO,
+        photo: photo
     }
 }
 
@@ -85,6 +98,29 @@ export const updateProfileStatusThunkCreator = (status) => {
         let data = await profileAPI.updateStatus(status)
         if (data.data.resultCode === 0) {
             dispatch(getProfileStatusAC(status))
+        }
+    }
+}
+
+export const savePhotoThunkCreator = (file) => {
+    return async (dispatch) => {
+        let data = await profileAPI.savePhoto(file)
+        if (data.data.resultCode === 0) {
+            dispatch(updatePhotoActionCreator(data.data.data.photos))
+        }
+    }
+}
+
+export const saveProfileInfoThunkCreator = (newProfile) => {
+    return async (dispatch, getState) => {
+        const userID = getState().auth.userId
+        let data = await profileAPI.saveProfileInfo(newProfile)
+        if (data.data.resultCode === 0) {
+            dispatch(setProfileInfoThunkCreator(userID))
+        } else {
+            let messageError = data.data.messages.length > 0 ? data.data.messages[0] : 'error'
+            dispatch(stopSubmit('settings', { _error: messageError }))  
+            return Promise.reject(messageError)      
         }
     }
 }

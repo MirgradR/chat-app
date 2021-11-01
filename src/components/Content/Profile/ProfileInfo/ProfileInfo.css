@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 80px 1fr;
 }
-.profile__avatar {
+.profile-info__avatar {
     margin-right: 15px;
 }
 .personal-info__item-contacts {
@@ -15,4 +15,24 @@
     justify-content: left;
     align-items: flex-start;
     flex-direction: column;
+}
+.change-avatar {
+    display: flex;
+    flex-direction: column;
+}
+.change-avatar__input {
+    opacity: 0;
+    visibility: hidden;
+}
+.change-avatar__element {
+    border: 1px solid rgb(24, 97, 131);
+    background-color: rgb(87, 160, 194);
+    font-size: 12px;
+    color: #fff;
+    justify-self: center;
+    text-align: center;
+    cursor: pointer;
+}
+.change-avatar__element:hover {
+    background-color: rgb(54, 107, 131);
 }

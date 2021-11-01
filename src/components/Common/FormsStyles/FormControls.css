@@ -11,7 +11,8 @@
     display: flex;
     flex-direction: column;
 }
-.form-login-error {
+.form-login-error,
+.form-settings-error {
     border: 2px solid red;
     color: red;
     margin-bottom: 10px;

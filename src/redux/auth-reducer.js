@@ -1,13 +1,15 @@
 import { stopSubmit } from "redux-form"
-import { authAPI } from "../api/api"
+import { authAPI, securityAPI } from "../api/api"
 
 const SET_USER_DATA = 'AUTH/SET-USER-DATA'
+const GET_CAPTCHA_URL_SUCCSESS = 'AUTH/GET-CAPTCHA-URL-SUCCSESS'
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -16,6 +18,10 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 ...action.data
+            }
+        case GET_CAPTCHA_URL_SUCCSESS:
+            return {
+                ...state, captchaUrl: action.captchaUrl
             }
         default:
             return state
@@ -28,7 +34,12 @@ export const setUserDataAC = (userId, email, login, isAuth) => {
         data: {userId, email, login, isAuth}
     }
 }
-
+export const getCaptchaUrlActionCreator = (captchaUrl) => {
+    return {
+        type: GET_CAPTCHA_URL_SUCCSESS,
+        captchaUrl: captchaUrl
+    }
+}
 export const setUserData = () => {
     return async (dispatch) => {
         let data = await authAPI.getProfileAuth()
@@ -38,18 +49,30 @@ export const setUserData = () => {
         }
     }
 }
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, captcha) => {
     return async (dispatch) => {
-        let data = await authAPI.loginAuth(email, password, rememberMe)
+        let data = await authAPI.loginAuth(email, password, rememberMe, captcha)
         if (data.resultCode === 0) {
             dispatch(setUserData())
-        }
-        else {
-            let messageError = data.data.messages.length > 0 ? data.data.messages[0] : 'The Login or Password is incorrect'
+        } else {
+            
+            if (data.resultCode === 10) {
+               dispatch(getCaptchaUrl()) 
+            }
+            let messageError = data.messages.length > 0 ? data.messages[0] : 'The Login or Password is incorrect'
             dispatch(stopSubmit('login', { _error: messageError }))
         }
     }
 }
+
+export const getCaptchaUrl = () => {
+    return async (dispatch) => {
+        let data = await securityAPI.getCaptchaUrl()
+        const captchaUrl = data.data.url
+        dispatch(getCaptchaUrlActionCreator(captchaUrl))
+    }
+}
+
 export const logout = () => {
     return async (dispatch) => {
         let data = await authAPI.logoutAuth()
@@ -58,4 +81,3 @@ export const logout = () => {
         }
     }
 }
-

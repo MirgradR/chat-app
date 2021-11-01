@@ -22,8 +22,8 @@ export const friendsAPI = {
 }
 
 export const authAPI = {
-    loginAuth (email, password, rememberMe = false ) {
-        return instance.post(`auth/login`, { email, password, rememberMe }).then(data => data.data)
+    loginAuth (email, password, rememberMe = false, captcha = null ) {
+        return instance.post(`auth/login`, { email, password, rememberMe, captcha }).then(data => data.data)
     },
     logoutAuth () {
         return instance.delete(`auth/login`).then(data => data.data)
@@ -43,5 +43,29 @@ export const profileAPI = {
     },
     updateStatus(status) {
         return instance.put(`profile/status`, {status: status}).then(data => data)
+    },
+    savePhoto(file) {
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    saveProfileInfo(newProfile) {
+        newProfile.aboutMe = newProfile.fullName
+        const formData = JSON.stringify(newProfile)
+        return instance.put(`profile`, formData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+}
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url')
     }
 }

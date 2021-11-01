@@ -31,3 +31,12 @@
 .login-form__password {
     margin-top: 10px;
 }
+.form-login-captcha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input-captcha {
+    margin-bottom: 10px;
+
+}

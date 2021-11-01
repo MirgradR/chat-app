@@ -1,0 +1,45 @@
+.form-personal__item.checkbox {
+    display: flex;   
+    align-items: center; 
+}
+.form-personal__item.checkbox>p {
+    margin-right: 10px;
+}
+.settings-form,
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-settings {
+    margin-top: 10px;
+}
+.form-personal__item,
+.form-contacts__item {
+    margin: 10px 0;
+}
+.form-personal__item>input,
+.form-contacts__item>input {
+    border: 1px solid black;
+}
+.settings-succsess {
+    display: flex;
+    flex-direction: column;
+}
+.settings-succsess__title {
+    padding: 30px;
+    border: 1px solid greenyellow;
+    text-align: center;
+}
+.settings-succsess__btn {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(183, 243, 123);
+    align-self: center;
+    margin-top: 20px;
+    color: rgb(25, 26, 25);
+}
+.settings-succsess__btn:hover {
+    background-color: rgb(83, 126, 20);
+    color: honeydew;
+}
