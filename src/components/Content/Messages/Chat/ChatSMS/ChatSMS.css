@@ -20,3 +20,12 @@
     border-radius: 15px;
     padding: 5px 8px;
 }
+@media screen and (max-width: 800px) {
+    .chat-message {
+        font-size: 12px;
+        gap: 4px;
+    }
+    .chat-message__avatar {
+        width: 40px;
+    }
+}

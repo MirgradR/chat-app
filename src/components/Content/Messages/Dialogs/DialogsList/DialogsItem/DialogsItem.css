@@ -13,3 +13,8 @@
 .dialogs-list__item:hover {
     background-color: rgba(0, 0, 0, 0.123);
 }
+@media screen and (max-width: 800px) {
+    .dialogs-list__item.active{
+        font-size: 14px;
+    }
+}

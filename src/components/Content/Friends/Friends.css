@@ -1,6 +1,7 @@
 .friends__list {
     padding: 10px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
 }
 .friends {
     display: flex;
@@ -21,3 +22,4 @@
 .pagination-pages__value.selected{
     background-color: rgba(0, 0, 0, 0.308);
 }
+

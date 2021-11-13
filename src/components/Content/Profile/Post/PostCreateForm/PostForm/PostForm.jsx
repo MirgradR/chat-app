@@ -6,9 +6,15 @@ import './PostForm.css'
 const maxLength10 = maxLengthCreator(10)
 
 const PostForm = (props) => {
-  
+    
+    const onSubmit = (e) => {
+        e.preventDefault()
+        props.handleSubmit()
+        props.reset()
+    }
+
     return (
-        <form className="create-post" onSubmit = {props.handleSubmit} >
+        <form className="create-post" onSubmit = {onSubmit} >
             <Field className="input-post" component = {Textarea} name = {'newPost'} validate = {[requeiredField, maxLength10]} />
             <button className="btn-send post__btn" >Send</button>
         </form>

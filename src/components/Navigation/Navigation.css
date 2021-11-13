@@ -6,3 +6,9 @@
     position: fixed;
     top: 64px;
 }
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        transform: translate(-140px);
+    }
+}

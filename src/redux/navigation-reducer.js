@@ -1,5 +1,5 @@
 let initialState = {
-    navigation: ['Profile', 'Messages', 'News', 'Music', 'Friends', 'Settings']
+    navigation: ['Profile', 'Messages', 'Friends', 'Settings']
 }
 
 export const navigationReducer = (state = initialState, action) => {

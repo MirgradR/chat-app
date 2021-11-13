@@ -4,3 +4,11 @@
     background-color: rgba(61, 79, 87, 0.164);
     height: 100%;
 }
+@media screen and (max-width: 800px) {
+    .dialogs-title {
+        font-size: 16px;
+    }
+    .dialogs-list {
+        font-size: 12px;
+    }
+}

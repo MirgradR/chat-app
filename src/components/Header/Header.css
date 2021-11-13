@@ -27,3 +27,56 @@
 .header__login-logout {
     cursor: pointer;
 }
+
+
+
+.burger-menu {
+    display: none;   
+    width: 50px; 
+    margin-left: 10px;
+    
+}
+.burger-menu__item,
+.burger-menu__item:after,
+.burger-menu__item:before {
+    border: 1px solid #000;
+    width: 30px;
+    transition: all 0.5s ease;
+}
+.burger-menu__item{
+    position: relative;
+    
+}
+.burger-menu__item:after,
+.burger-menu__item:before {
+    content: '';
+    position: absolute;
+    left: -1px;
+}
+.burger-menu__item:after {
+    top: 9px;
+}
+.burger-menu__item:before {
+    top: -12px;
+}
+.burger-menu.active .burger-menu__item:after{
+    top: 0;
+    transform: rotate(45deg);
+}
+.burger-menu.active .burger-menu__item:before{
+    top: 0;
+    transform: rotate(-45deg);
+}
+.burger-menu.active .burger-menu__item{
+    border: 1px solid transparent;
+}
+
+
+@media screen and (max-width: 800px) {
+    .header__logo {
+        display: none;
+    }
+    .burger-menu {
+        display: block;
+    }
+}

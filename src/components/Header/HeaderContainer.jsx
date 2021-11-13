@@ -14,14 +14,15 @@ class HeaderContainer extends React.Component {
 
     render() {
         return (
-            <Header auth = {this.props.auth} logout = {this.props.logout} />
+            <Header auth = {this.props.auth} logout = {this.props.logout} navigation = {this.props.navigation} />
         )
     }
 
 }
 
 let mapStateToProps = (state) => ({
-    auth: state.auth
+    auth: state.auth,
+    navigation: state.navigation.navigation
 })
 
 

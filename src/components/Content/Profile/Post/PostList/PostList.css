@@ -2,3 +2,9 @@
     display: grid;
     gap:  15px;
 }
+@media screen and (max-width: 800px) {
+    .post-list{
+        font-weight: 500;
+        font-size: 14px;
+    }
+}

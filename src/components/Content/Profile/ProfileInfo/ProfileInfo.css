@@ -36,3 +36,9 @@
 .change-avatar__element:hover {
     background-color: rgb(54, 107, 131);
 }
+@media screen and (max-width: 800px) {
+    .profile-info h3{
+        font-weight: 500;
+        font-size: 16px;
+    }
+}

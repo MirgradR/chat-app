@@ -42,7 +42,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className="personal-info profile__info">
                 <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{profile.fullName}</h3>
-                <ProfileStatusHooks status ={props.status} updateStatus = {props.updateStatus} />
+                <ProfileStatusHooks isOwner = {props.isOwner} status ={props.status} updateStatus = {props.updateStatus} />
                 <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{profile.lookingForAJob ? 'I am looking for a job' : 'I have a job'}</h3>
                 <h3 className="personal-info__item" key = {Math.floor(Math.random()*1000)}>{profile.lookingForAJobDescription && profile.lookingForAJobDescription }</h3>
                 <div className = 'personal-info__item-contacts'>

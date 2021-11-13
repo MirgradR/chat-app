@@ -18,3 +18,9 @@ div .preloader {
     display: block;
     margin-top: 200px;
 }
+@media screen and (max-width: 800px) {
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+}
