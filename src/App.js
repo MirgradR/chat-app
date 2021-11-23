@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'; 
 import './App.css';
 import Preloader from './components/Common/Preloader/Preloader';
 import Content from './components/Content/Content';

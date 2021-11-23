@@ -1,6 +1,8 @@
+import { addMessageActionType, InitialStateMessagesType } from "../types/MessagesTypes/MessagesTypes"
+
 const ADD_MESSAGE = 'MESSAGES/ADD-MESSAGE'
 
-let initialState = {
+let initialState: InitialStateMessagesType = {
     usersList: [
         { name: 'Alex', id: 1 },
         { name: 'Jenya', id: 2 },
@@ -18,8 +20,7 @@ let initialState = {
     ],
 }
 
-export const messagesReducer = (state = initialState, action) => {
-
+export const messagesReducer = (state = initialState, action: any): InitialStateMessagesType => {
     switch (action.type) {
         case ADD_MESSAGE: 
             let newMessage = action.newMessage
@@ -32,7 +33,7 @@ export const messagesReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = (newMessage) => {
+export const addMessageActionCreator = (newMessage: string): addMessageActionType => {
     return {
         type: ADD_MESSAGE,
         newMessage: newMessage

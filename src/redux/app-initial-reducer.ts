@@ -1,12 +1,13 @@
+import { InitializedSuccessActionType, InitialStateInitializedType } from "../types/AppTypes/AppTypes"
 import { setUserData } from "./auth-reducer"
 
 const SET_INITIALIZED = 'SET-INITIALIZED'
 
-let initialState = {
+let initialState: InitialStateInitializedType = {
     initialized: false,
 }
 
-export const initializedReducer = (state = initialState, action) => {
+export const initializedReducer = (state = initialState, action: any): InitialStateInitializedType => {
     switch(action.type) {
         case SET_INITIALIZED:
             return {
@@ -18,14 +19,14 @@ export const initializedReducer = (state = initialState, action) => {
     }
 }
 
-export const initializedSuccessAC = () => {
+export const initializedSuccessAC = ():InitializedSuccessActionType => {
     return {
         type: SET_INITIALIZED,
     }
 }
 
 export const initializeThunkCreator = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         let promise = dispatch(setUserData())
         promise.then( () => {
             dispatch(initializedSuccessAC())

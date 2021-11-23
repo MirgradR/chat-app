@@ -6,14 +6,16 @@ import Preloader from "../../Common/Preloader/Preloader";
 import { WithAuthRedirect } from "../../../HOC/WithAuthRedirect";
 import { compose } from "redux";
 import { getCurrentPage, getFollowingProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../../redux/friends-selectors";
+import { FriendsContainerPropsType, FriendsContainerStatePropsType } from "../../../types/FriendsTypes/FriendsTypesComponent";
+import { AppStateType } from "../../../redux/redux-store";
 
-class FriendsContainer extends React.Component {
+class FriendsContainer extends React.Component<FriendsContainerPropsType> {
     
     componentDidMount() { 
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    setCurrentPage = (p) => {
+    setCurrentPage = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.getUsers(p, this.props.pageSize)
     }
@@ -29,14 +31,14 @@ class FriendsContainer extends React.Component {
                     users={this.props.users}
                     followUser={this.props.followUser}
                     unfollowUser={this.props.unfollowUser}
-                    setUsers={this.props.setUsers}
+                    
                     followingProgress = {this.props.followingProgress} />}
             </div>   
         )
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): FriendsContainerStatePropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -48,7 +50,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose (
-    connect(mapStateToProps, {
+    connect (mapStateToProps, {
         followUser: followUserThunkCreator,
         unfollowUser: unFollowUserThunkCreator,
         setCurrentPage: setCurrentPageAC,
@@ -58,3 +60,5 @@ export default compose (
     WithAuthRedirect
 ) (FriendsContainer)
 
+//setUsers={this.props.setUsers} 
+//<FriendsContainerStatePropsType, FriendsContainerDispatchPropsType, FriendsContainerOwnPropsType, AppStateType >
