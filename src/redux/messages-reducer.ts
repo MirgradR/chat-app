@@ -1,4 +1,4 @@
-import { addMessageActionType, InitialStateMessagesType } from "../types/MessagesTypes/MessagesTypes"
+import { addMessageActionType, InitialStateMessagesType, MessagesActionsTypes } from "../types/MessagesTypes/MessagesTypes"
 
 const ADD_MESSAGE = 'MESSAGES/ADD-MESSAGE'
 
@@ -20,7 +20,7 @@ let initialState: InitialStateMessagesType = {
     ],
 }
 
-export const messagesReducer = (state = initialState, action: any): InitialStateMessagesType => {
+export const messagesReducer = (state = initialState, action: MessagesActionsTypes): InitialStateMessagesType => {
     switch (action.type) {
         case ADD_MESSAGE: 
             let newMessage = action.newMessage

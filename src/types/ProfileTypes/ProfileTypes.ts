@@ -1,3 +1,5 @@
+import { AppStateType } from './../../redux/redux-store';
+import { ThunkAction } from 'redux-thunk';
 const ADD_POST = 'PROFILE/ADD-POST'
 const SET_PROFILE_INFO = 'PROFILE/SET-PROFILE-INFO'
 const GET_STATUS = 'PROFILE/GET-STATUS'
@@ -9,7 +11,7 @@ export type ProfilePostUsersType = {
     likes: number, 
     name: string
 }
-
+ 
 export type InitialStateProfileType = {
     postUsers: Array<ProfilePostUsersType>
     profileInfo: ProfileProfileInfoType | null,
@@ -38,9 +40,14 @@ export type ProfileProfileInfoType = {
     fullName?: string
     contacts?: ProfileProfileInfoContactsType
     photos?: ProfileProfileInfoPhotosType
+    aboutMe?: string
 }
 
 ////////// ActionsTypes
+
+export type ProfileActionsTypes = AddPostActionType | SetProfileInfoActionType | GetProfileStatusActionType | updatePhotoActionType 
+
+export type ProfileThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsTypes>
 
 export type AddPostActionType = {
     type: typeof ADD_POST,
@@ -56,5 +63,5 @@ export type GetProfileStatusActionType = {
 }
 export type updatePhotoActionType = {
     type: typeof UPDATE_PHOTO,
-    photo: string
+    photo: ProfileProfileInfoPhotosType
 }

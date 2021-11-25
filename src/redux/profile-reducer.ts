@@ -1,6 +1,7 @@
 import { stopSubmit } from "redux-form"
 import { profileAPI } from "../api/api"
-import { AddPostActionType, GetProfileStatusActionType, InitialStateProfileType, ProfileProfileInfoType, updatePhotoActionType } from '../types/ProfileTypes/ProfileTypes';
+import { ResultCodesEnum } from "../types/APITypes/ApiTypes";
+import { AddPostActionType, GetProfileStatusActionType, InitialStateProfileType, ProfileActionsTypes, ProfileProfileInfoPhotosType, ProfileProfileInfoType, ProfileThunkType, updatePhotoActionType } from '../types/ProfileTypes/ProfileTypes';
 
 const ADD_POST = 'PROFILE/ADD-POST'
 const SET_PROFILE_INFO = 'PROFILE/SET-PROFILE-INFO'
@@ -20,7 +21,7 @@ let initialState: InitialStateProfileType = {
     status: ''
 }
 
-export const profileReducer = (state = initialState, action: any): InitialStateProfileType => {
+export const profileReducer = (state = initialState, action: ProfileActionsTypes): InitialStateProfileType => {
     switch (action.type) {
         case ADD_POST: 
             let newPost = action.newPost
@@ -67,7 +68,7 @@ export const getProfileStatusAC = (status: string): GetProfileStatusActionType =
     }
 }
 
-export const updatePhotoActionCreator = (photo: string): updatePhotoActionType => {
+export const updatePhotoActionCreator = (photo: ProfileProfileInfoPhotosType): updatePhotoActionType => {
     return {
         type: UPDATE_PHOTO,
         photo: photo
@@ -85,30 +86,31 @@ export const setProfileInfoThunkCreator = (userID: number, myProfile: number) =>
     }
 }
 
-export const getProfileStatusThunkCreator = (userID: number, myProfile: number) => {
-    return async (dispatch: any) => {
+export const getProfileStatusThunkCreator = (userID: number, myProfile: number): ProfileThunkType => {
+    return async (dispatch) => {
         let showUserByID = userID
         if (!showUserByID) {
             showUserByID = myProfile
         }
-        let data: any = await profileAPI.getStatus(showUserByID)
+        let data = await profileAPI.getStatus(showUserByID)
         dispatch(getProfileStatusAC(data))
     }
 }
-export const updateProfileStatusThunkCreator = (status: string) => {
-    return async (dispatch: any) => {
-        let data: any = await profileAPI.updateStatus(status)
-        if (data.data.resultCode === 0) {
+export const updateProfileStatusThunkCreator = (status: string): ProfileThunkType => {
+    return async (dispatch) => {
+        let data = await profileAPI.updateStatus(status)
+        if (data.data.resultCode === ResultCodesEnum.Success) {
             dispatch(getProfileStatusAC(status))
         }
     }
 }
 
-export const savePhotoThunkCreator = (file: any) => {
-    return async (dispatch: any) => {
+export const savePhotoThunkCreator = (file: any): ProfileThunkType => {
+    return async (dispatch) => {
         let data: any = await profileAPI.savePhoto(file)
-        if (data.data.resultCode === 0) {
-            dispatch(updatePhotoActionCreator(data.data.data.photos))
+        
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(updatePhotoActionCreator(data.data.photos))
         }
     }
 }
@@ -116,14 +118,16 @@ export const savePhotoThunkCreator = (file: any) => {
 export const saveProfileInfoThunkCreator = (newProfile: ProfileProfileInfoType) => {
     return async (dispatch: any, getState: any) => {
         const userID = getState().auth.userId
-        let data: any = await profileAPI.saveProfileInfo(newProfile)
-        if (data.data.resultCode === 0) {
+        let data = await profileAPI.saveProfileInfo(newProfile)
+        
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(setProfileInfoThunkCreator(userID, 0))
         } else {
-            let messageError = data.data.messages.length > 0 ? data.data.messages[0] : 'error'
+            let messageError = data.messages.length > 0 ? data.messages[0] : 'error'
             dispatch(stopSubmit('settings', { _error: messageError }))  
             return Promise.reject(messageError)      
         }
     }
 }
+
 

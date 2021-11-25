@@ -9,6 +9,7 @@ export type InitialStateAuthType = {
     captchaUrl: string | null
 }
 
+export type AuthActionsTypes = setUserDataActionType | getCaptchaUrlActionType
 
 export type setUserDataActionPayloadType = {
     userId: number | null, 
@@ -23,7 +24,7 @@ export type setUserDataActionType = {
 }
 
 export type getCaptchaUrlType = {
-    captchaUrl: string
+    captchaUrl: string 
 }
 
 export type getCaptchaUrlActionType = {

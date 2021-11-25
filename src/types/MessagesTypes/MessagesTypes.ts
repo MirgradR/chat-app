@@ -16,6 +16,7 @@ export type InitialStateMessagesType = {
 
 ///////ActionTypes
 
+export type MessagesActionsTypes = addMessageActionType
 
 export type addMessageActionType = {
     type: typeof ADD_MESSAGE

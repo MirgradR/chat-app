@@ -13,6 +13,7 @@ let initialState = {
     captchaUrl: null
 }
 
+
 export const authReducer = (state = initialState, action: any): InitialStateAuthType => {
     switch(action.type) {
         case SET_USER_DATA:
@@ -44,7 +45,7 @@ export const getCaptchaUrlActionCreator = (captchaUrl: getCaptchaUrlType): getCa
 }
 export const setUserData = () => {
     return async (dispatch: any) => {
-        let data: any = await authAPI.getProfileAuth()
+        let data = await authAPI.getProfileAuth()
         const userInfo = data.data
         if (data.resultCode === 0) {
             dispatch(setUserDataAC(userInfo.id, userInfo.email, userInfo.login, true))

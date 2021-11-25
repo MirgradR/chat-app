@@ -1,3 +1,5 @@
+import { ThunkAction } from "redux-thunk"
+import { AppStateType } from "../../redux/redux-store"
 import { ProfileProfileInfoPhotosType } from "../ProfileTypes/ProfileTypes"
 
 const FOLLOW = 'FRIENDS/FOLLOW'
@@ -26,6 +28,12 @@ export type FriendsUsersType = {
 }
 
 /////////////ActionTypes
+
+export type FriendsActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType 
+| SetCurrentPageActionType | SetTotalUsersCountActionType 
+| ToggleIsFetchingCountActionType | ToggleFollowingProgressActionType
+
+export type FriendsThunkType = ThunkAction<Promise<void>, AppStateType, unknown, FriendsActionsTypes>
 
 export type FollowActionType = {
     type: typeof FOLLOW,
