@@ -1,12 +1,13 @@
-import { Field, reduxForm } from 'redux-form'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { maxLengthCreator, requeiredField } from '../../../../utils/validator/validators'
 import { Input } from '../../../Common/FormsStyles/FormControls'
 import './LoginForm.css'
 import '../../../Common/FormsStyles/FormControls.css'
+import { LoginFormOwnProps, LoginFormValuesTypes } from '../../../../types/LoginTypes/LoginTypes'
 
 const maxLength25 = maxLengthCreator(25)
 
-export const LoginForm = ({handleSubmit, error, captchaUrl}) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesTypes, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, error, captchaUrl}) => {
     
     return (
         <form onSubmit = {handleSubmit} className = 'login-form'>
@@ -27,4 +28,5 @@ export const LoginForm = ({handleSubmit, error, captchaUrl}) => {
         </form>
     )
 }
-export const LoginReduxForm = reduxForm({form: 'login'}) (LoginForm)
+
+export const LoginReduxForm = reduxForm<LoginFormValuesTypes, LoginFormOwnProps>({form: 'login'}) (LoginForm)

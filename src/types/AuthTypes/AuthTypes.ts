@@ -24,7 +24,7 @@ export type setUserDataActionType = {
 }
 
 export type getCaptchaUrlType = {
-    captchaUrl: string 
+    captchaUrl: string | null
 }
 
 export type getCaptchaUrlActionType = {

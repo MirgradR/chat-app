@@ -1,11 +1,11 @@
 import { stopSubmit } from "redux-form"
 import { authAPI, securityAPI } from "../api/api"
-import { getCaptchaUrlActionType, getCaptchaUrlType, InitialStateAuthType } from "../types/AuthTypes/AuthTypes"
+import { AuthActionsTypes, getCaptchaUrlActionType, getCaptchaUrlType, InitialStateAuthType } from "../types/AuthTypes/AuthTypes"
 
 const SET_USER_DATA = 'AUTH/SET-USER-DATA'
 const GET_CAPTCHA_URL_SUCCSESS = 'AUTH/GET-CAPTCHA-URL-SUCCSESS'
 
-let initialState = {
+let initialState: InitialStateAuthType = {
     userId: null,
     email: null,
     login: null,
