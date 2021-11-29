@@ -1,7 +1,7 @@
 import Profile from "./Profile";
 import React from "react";
 import { connect } from "react-redux";
-import { addPostActionCreator, getProfileStatusThunkCreator, savePhotoThunkCreator, setProfileInfoThunkCreator, updateProfileStatusThunkCreator } from "../../../redux/profile-reducer";
+import { getProfileStatusThunkCreator, profileActions, savePhotoThunkCreator, setProfileInfoThunkCreator, updateProfileStatusThunkCreator } from "../../../redux/profile-reducer";
 import { withRouter } from "react-router";
 import { WithAuthRedirect } from "../../../HOC/WithAuthRedirect";
 import { compose } from "redux";
@@ -51,7 +51,7 @@ export default compose (
     connect(mapStateToProps, {setProfileInfo: setProfileInfoThunkCreator, 
         getProfileStatus: getProfileStatusThunkCreator, 
         updateProfileStatus: updateProfileStatusThunkCreator,
-        addPost: addPostActionCreator,
+        addPost: profileActions.addPostActionCreator,
         savePhoto: savePhotoThunkCreator
     }),
     withRouter,

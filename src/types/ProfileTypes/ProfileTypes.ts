@@ -1,9 +1,5 @@
-import { AppStateType } from './../../redux/redux-store';
-import { ThunkAction } from 'redux-thunk';
-const ADD_POST = 'PROFILE/ADD-POST'
-const SET_PROFILE_INFO = 'PROFILE/SET-PROFILE-INFO'
-const GET_STATUS = 'PROFILE/GET-STATUS'
-const UPDATE_PHOTO = 'PROFILE/UPDATE-PHOTO'
+import { profileActions } from './../../redux/profile-reducer';
+import { InferActionsTypes } from '../commonTypes';
 
 export type ProfilePostUsersType = {
     post: string, 
@@ -45,23 +41,4 @@ export type ProfileProfileInfoType = {
 
 ////////// ActionsTypes
 
-export type ProfileActionsTypes = AddPostActionType | SetProfileInfoActionType | GetProfileStatusActionType | updatePhotoActionType 
-
-export type ProfileThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsTypes>
-
-export type AddPostActionType = {
-    type: typeof ADD_POST,
-    newPost: string
-}
-export type SetProfileInfoActionType = {
-    type: typeof SET_PROFILE_INFO,
-    profileInfo: ProfileProfileInfoType
-}
-export type GetProfileStatusActionType = {
-    type: typeof GET_STATUS,
-    status: string
-}
-export type updatePhotoActionType = {
-    type: typeof UPDATE_PHOTO,
-    photo: ProfileProfileInfoPhotosType
-}
+export type ProfileActionsTypes = InferActionsTypes<typeof profileActions>

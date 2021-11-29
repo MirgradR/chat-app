@@ -1,4 +1,7 @@
-const ADD_MESSAGE = 'MESSAGES/ADD-MESSAGE'
+import { ThunkAction } from 'redux-thunk';
+import { messagesActions } from "../../redux/messages-reducer"
+import { AppStateType } from "../../redux/redux-store"
+import { InferActionsTypes } from "../commonTypes"
 
 export type MessagesUsersListType = {
     name: string, 
@@ -16,9 +19,6 @@ export type InitialStateMessagesType = {
 
 ///////ActionTypes
 
-export type MessagesActionsTypes = addMessageActionType
+export type MessagesActionsTypes = InferActionsTypes<typeof messagesActions>
 
-export type addMessageActionType = {
-    type: typeof ADD_MESSAGE
-    newMessage: string
-}
+export type FriendsThunkType = ThunkAction<Promise<void>, AppStateType, unknown, InferActionsTypes<typeof messagesActions>>

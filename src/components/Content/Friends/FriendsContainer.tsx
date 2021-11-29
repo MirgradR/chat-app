@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { followUserThunkCreator, getUsersThunkCreator, setCurrentPageAC, toggleFollowingProgressAC, unFollowUserThunkCreator } from "../../../redux/friends-reducer";
+import { followUserThunkCreator, friendsActions, getUsersThunkCreator, unFollowUserThunkCreator } from "../../../redux/friends-reducer";
 import React from 'react'
 import Friends from './Friends'
 import Preloader from "../../Common/Preloader/Preloader";
@@ -53,8 +53,8 @@ export default compose (
     connect (mapStateToProps, {
         followUser: followUserThunkCreator,
         unfollowUser: unFollowUserThunkCreator,
-        setCurrentPage: setCurrentPageAC,
-        toggleFollowingProgress: toggleFollowingProgressAC,
+        setCurrentPage: friendsActions.setCurrentPageAC,
+        toggleFollowingProgress: friendsActions.toggleFollowingProgressAC,
         getUsers: getUsersThunkCreator
         }),
     WithAuthRedirect

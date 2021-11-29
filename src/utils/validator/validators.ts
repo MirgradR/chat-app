@@ -1,6 +1,5 @@
 export type ValidatorsRequiredType = (value: string) => string | undefined
 
-
 export const requeiredField: ValidatorsRequiredType = (value) => {
     if (value) {
         return undefined
@@ -8,8 +7,7 @@ export const requeiredField: ValidatorsRequiredType = (value) => {
     return 'Field is required'
 }
 
-export const maxLengthCreator = (maxLength: number): ValidatorsRequiredType => (value: string) => {
-    
+export const maxLengthCreator = (maxLength: number): ValidatorsRequiredType => (value: string) => {   
     if (value) {
         if (value.length > maxLength) {
             return `Max length is ${maxLength}`

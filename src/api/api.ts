@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AuthApiLoginResponseType, AuthApiLogoutResponseType, AuthApiResponseType, FriendsApiFollowResponseType, FriendsApiGetUsersResponseType, FriendsApiUnfollowResponseType, ProfileInfoApiResponseType, ProfileSaveInfoApiResponseType, ProfileStatusUpdateApiResponseType } from "../types/APITypes/ApiTypes";
+import {  AuthDataType, AuthLoginDataType, FriendsApiGetUsersResponseType, GetCaptchaApiResponseType, PhotosFromApi, ResponseType } from "../types/APITypes/ApiTypes";
 import { ProfileProfileInfoType } from "../types/ProfileTypes/ProfileTypes";
 
 const instance = axios.create({
@@ -12,10 +12,10 @@ const instance = axios.create({
 
 export const friendsAPI = {
     followUser(userID: number) {
-        return instance.post<FriendsApiFollowResponseType>(`follow/${userID}`, null).then(data => data.data)
+        return instance.post<ResponseType>(`follow/${userID}`, null).then(data => data.data)
     },
     unFollowUser(userID: number) {
-        return instance.delete<FriendsApiUnfollowResponseType>(`follow/${userID}`).then(data => data.data)
+        return instance.delete<ResponseType>(`follow/${userID}`).then(data => data.data)
     },
     getUsers(currentPage: number, pageSize: number) {
         return instance.get<FriendsApiGetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(data => data.data)
@@ -24,30 +24,30 @@ export const friendsAPI = {
 
 export const authAPI = {
     loginAuth (email: string, password: string, rememberMe = false, captcha: null | string = null ) {
-        return instance.post<AuthApiLoginResponseType>(`auth/login`, { email, password, rememberMe, captcha }).then(data => data.data)
+        return instance.post<ResponseType<AuthLoginDataType>>(`auth/login`, { email, password, rememberMe, captcha }).then(data => data.data)
     },
     logoutAuth () {
-        return instance.delete<AuthApiLogoutResponseType>(`auth/login`).then(data => data.data)
+        return instance.delete<ResponseType>(`auth/login`).then(data => data.data)
     },
     getProfileAuth () {
-        return instance.get<AuthApiResponseType>(`auth/me`).then(data => data.data)
+        return instance.get<ResponseType<AuthDataType>>(`auth/me`).then(data => data.data)
     }
 }
 
 export const profileAPI = {
     getProfileInfo(userID: number) {
-        return instance.get<ProfileInfoApiResponseType>(`profile/` + userID).then(data => data.data)
+        return instance.get<ResponseType<ProfileProfileInfoType>>(`profile/` + userID)//.then(data =>  data) //.data
     },
     getStatus(userID: number) {
         return instance.get<string>(`profile/status/` + userID).then(data => data.data)
     },
     updateStatus(status: string) {
-        return instance.put<ProfileStatusUpdateApiResponseType>(`profile/status`, {status: status}).then(data => data)
+        return instance.put<ResponseType>(`profile/status`, {status: status}).then(data => data)
     },
-    savePhoto(file: any) {
+    savePhoto(file: File) {
         const formData = new FormData()
         formData.append('image', file)
-        return instance.put('profile/photo', formData, {
+        return instance.put<ResponseType<PhotosFromApi>>('profile/photo', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -56,7 +56,7 @@ export const profileAPI = {
     saveProfileInfo(newProfile: ProfileProfileInfoType) {
         newProfile.aboutMe = newProfile.fullName
         const formData = JSON.stringify(newProfile)
-        return instance.put<ProfileSaveInfoApiResponseType>(`profile`, formData, {
+        return instance.put<ResponseType>(`profile`, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -66,6 +66,6 @@ export const profileAPI = {
 
 export const securityAPI = {
     getCaptchaUrl() {
-        return instance.get('security/get-captcha-url')
+        return instance.get<GetCaptchaApiResponseType>('security/get-captcha-url')
     }
 }

@@ -1,7 +1,6 @@
 export type LoginMapStateToProps = {
     captchaUrl: string | null
     isAuth: boolean 
-
 }
 export type LoginMapDispatchToProps = {
     login: (email: string, password: string, rememberMe: boolean, captcha: any) => void

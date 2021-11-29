@@ -1,15 +1,14 @@
-import { AppActionsTypes, AppThunkType, InitializedSuccessActionType, InitialStateInitializedType } from "../types/AppTypes/AppTypes"
+import { AppActionsTypes, InitialStateInitializedType } from "../types/AppTypes/AppTypes"
+import { ThunkType } from "../types/commonTypes"
 import { setUserData } from "./auth-reducer"
-
-const SET_INITIALIZED = 'SET-INITIALIZED'
 
 let initialState: InitialStateInitializedType = {
     initialized: false,
 }
 
-export const initializedReducer = (state = initialState, action: AppActionsTypes): InitialStateInitializedType => {
+export const initializedReducer = (state = initialState, action: AppActionsTypes) => {
     switch(action.type) {
-        case SET_INITIALIZED:
+        case 'SET-INITIALIZED':
             return {
                 ...state, 
                 initialized: true
@@ -19,19 +18,17 @@ export const initializedReducer = (state = initialState, action: AppActionsTypes
     }
 }
 
-export const initializedSuccessAC = ():InitializedSuccessActionType => {
-    return {
-        type: SET_INITIALIZED,
+export const appInitialActions = {
+    initializedSuccessAC: () => {
+        return {
+            type: 'SET-INITIALIZED',
+        } as const
     }
 }
 
-export const initializeThunkCreator = (): AppThunkType => {
+export const initializeThunkCreator = (): ThunkType<AppActionsTypes> => {
     return async (dispatch) => {
         await dispatch(setUserData())
-        dispatch(initializedSuccessAC())             
+        dispatch(appInitialActions.initializedSuccessAC())             
     }
 }
-//        let promise = await dispatch(setUserData())
-// promise.then( () => {
-//     dispatch(initializedSuccessAC())
-// })  
