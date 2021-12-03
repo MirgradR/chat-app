@@ -26,6 +26,5 @@ const mapStateToProps = (state: AppStateType): LoginMapStateToProps => {
     }
 }
 
-
 const LoginContainer = connect(mapStateToProps, {login: login, logout: logout} ) (Login)
 export default LoginContainer 

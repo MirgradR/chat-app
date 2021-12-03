@@ -3,7 +3,7 @@ export type LoginMapStateToProps = {
     isAuth: boolean 
 }
 export type LoginMapDispatchToProps = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: any) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
     logout: () => void
 }
 export type LoginFormValuesTypes = {
@@ -15,5 +15,6 @@ export type LoginFormValuesTypes = {
 export type LoginFormOwnProps = {
     captchaUrl: string | null
 }
+
 
 export type LoginFormValuesTypeKeys = keyof LoginFormValuesTypes

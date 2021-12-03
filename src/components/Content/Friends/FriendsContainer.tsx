@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { followUserThunkCreator, friendsActions, getUsersThunkCreator, unFollowUserThunkCreator } from "../../../redux/friends-reducer";
-import React from 'react'
+import React, { useEffect } from 'react'
 import Friends from './Friends'
 import Preloader from "../../Common/Preloader/Preloader";
 import { WithAuthRedirect } from "../../../HOC/WithAuthRedirect";
@@ -9,33 +9,31 @@ import { getCurrentPage, getFollowingProgress, getIsFetching, getPageSize, getTo
 import { FriendsContainerPropsType, FriendsContainerStatePropsType } from "../../../types/FriendsTypes/FriendsTypesComponent";
 import { AppStateType } from "../../../redux/redux-store";
 
-class FriendsContainer extends React.Component<FriendsContainerPropsType> {
-    
-    componentDidMount() { 
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+const FriendsContainer: React.FC<FriendsContainerPropsType> = (props) => {
+
+    useEffect(() => {
+        props.getUsers(props.currentPage, props.pageSize)
+    }, [])
+
+    const setCurrentPage = (p: number) => {
+        props.setCurrentPage(p)
+        props.getUsers(p, props.pageSize)
     }
 
-    setCurrentPage = (p: number) => {
-        this.props.setCurrentPage(p)
-        this.props.getUsers(p, this.props.pageSize)
-    }
-    
-    render() {
-        return   (
-            <div>
-                {this.props.isFetching ? <Preloader/> : <Friends
-                    totalUsersCount={this.props.totalUsersCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
-                    setCurrentPage={this.setCurrentPage}
-                    users={this.props.users}
-                    followUser={this.props.followUser}
-                    unfollowUser={this.props.unfollowUser}
-                    
-                    followingProgress = {this.props.followingProgress} />}
-            </div>   
-        )
-    }
+    return (
+        <div>
+            {props.isFetching ? <Preloader /> : <Friends
+                totalUsersCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                setCurrentPage={setCurrentPage}
+                users={props.users}
+                followUser={props.followUser}
+                unfollowUser={props.unfollowUser}
+                followingProgress={props.followingProgress} />}
+        </div>
+    )
+
 }
 
 const mapStateToProps = (state: AppStateType): FriendsContainerStatePropsType => {
@@ -58,7 +56,4 @@ export default compose (
         getUsers: getUsersThunkCreator
         }),
     WithAuthRedirect
-) (FriendsContainer)
-
-//setUsers={this.props.setUsers} 
-//<FriendsContainerStatePropsType, FriendsContainerDispatchPropsType, FriendsContainerOwnPropsType, AppStateType >
+) (FriendsContainer) as React.ComponentType

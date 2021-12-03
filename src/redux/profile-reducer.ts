@@ -17,7 +17,7 @@ let initialState: InitialStateProfileType = {
     status: ''
 }
 
-export const profileReducer = (state = initialState, action: ProfileActionsTypes) => {
+export const profileReducer = (state = initialState, action: ProfileActionsTypes): InitialStateProfileType => {
     switch (action.type) {
         case 'PROFILE/ADD-POST': 
             let newPost = action.newPost
@@ -35,12 +35,12 @@ export const profileReducer = (state = initialState, action: ProfileActionsTypes
             }
         case 'PROFILE/UPDATE-PHOTO':
             return {
-                ...state, profileInfo: {...state.profileInfo, photos: action.photo}
+                ...state, profileInfo: {...state.profileInfo, photos: action.photo} as ProfileProfileInfoType
             }
         default: 
             return state 
     }
-}
+} 
 
 export const profileActions = {
     addPostActionCreator: (newPost: string) => {
@@ -69,7 +69,7 @@ export const profileActions = {
     },
 }
 
-export const setProfileInfoThunkCreator = (userID: number | null, myProfile: number): ThunkType<ProfileActionsTypes> => {
+export const setProfileInfoThunkCreator = (userID: number | null, myProfile: number ): ThunkType<ProfileActionsTypes> => {
     return async (dispatch) => {
         let showUserByID = userID
         if (!showUserByID) {

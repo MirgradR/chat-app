@@ -3,7 +3,6 @@ import './Friends.css'
 import { Pagination } from "./Pagination/Pagination"
 import { FriendsPropsType } from "../../../types/FriendsTypes/FriendsTypesComponent"
 
-
 const Friends: React.FC<FriendsPropsType> = (props) => {   
     return (
         <div className = 'friends content__friends'>
@@ -13,12 +12,11 @@ const Friends: React.FC<FriendsPropsType> = (props) => {
                     setCurrentPage = {props.setCurrentPage}
                 />
                 <ul className='friends__list'>
-                    {props.users.map(s => {
-                        return <FriendsItem users={s}
+                    {props.users.map(user => {
+                        return <FriendsItem user={user}
                             followUser={props.followUser}
                             unfollowUser={props.unfollowUser}
-                            
-                            key={s.id}
+                            key={user.id}
                             followingProgress = {props.followingProgress}  />
                     })}
                 </ul>
@@ -26,5 +24,3 @@ const Friends: React.FC<FriendsPropsType> = (props) => {
     )
 }
 export default Friends
-
-//setUsers={props.setUsers}

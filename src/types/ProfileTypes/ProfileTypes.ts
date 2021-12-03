@@ -10,33 +10,36 @@ export type ProfilePostUsersType = {
  
 export type InitialStateProfileType = {
     postUsers: Array<ProfilePostUsersType>
-    profileInfo: ProfileProfileInfoType | null,
+    profileInfo: ProfileProfileInfoType | null
     isFetching: boolean,
     status: string
 }
 
 export type ProfileProfileInfoContactsType = {
-    github?: string
-    vk?: string
-    facebook?: string
-    instagram?: string
-    twitter?: string
-    website?: string
-    youtube?: string
-    mainLink?: string
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+    [index: string]: string
 }
+
 export type ProfileProfileInfoPhotosType = {
-    small?: string | null
-    large?: string | null
+    small: string
+    large: string
 }
+// | null
 export type ProfileProfileInfoType = {
-    userId?: number
-    lookingForAJob?: boolean
-    lookingForAJobDescription?: string
-    fullName?: string
-    contacts?: ProfileProfileInfoContactsType
-    photos?: ProfileProfileInfoPhotosType
-    aboutMe?: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ProfileProfileInfoContactsType
+    photos: ProfileProfileInfoPhotosType
+    aboutMe: string
 }
 
 ////////// ActionsTypes

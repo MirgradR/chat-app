@@ -1,6 +1,4 @@
 import { friendsActions } from './../../redux/friends-reducer';
-import { ThunkAction } from "redux-thunk"
-import { AppStateType } from "../../redux/redux-store"
 import { ProfileProfileInfoPhotosType } from "../ProfileTypes/ProfileTypes"
 import { InferActionsTypes } from '../commonTypes';
 

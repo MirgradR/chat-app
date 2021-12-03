@@ -31,3 +31,11 @@ export type FriendsPropsType = {
     unfollowUser: (userId: number) => void
     followingProgress: Array<number>
 }
+
+export type FriendsItemPropsType = {
+    user: FriendsUsersType
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
+    followingProgress: Array<number>
+}
+ 
