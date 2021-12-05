@@ -24,4 +24,7 @@ export const getIsFetching = (state: AppStateType) => {
 export const getFollowingProgress = (state: AppStateType) => {
     return state.friendsData.followingProgress
 }
+export const getFilterFriends = (state: AppStateType) => {
+    return state.friendsData.filter
+}
 

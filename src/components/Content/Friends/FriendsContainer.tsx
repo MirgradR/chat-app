@@ -5,19 +5,24 @@ import Friends from './Friends'
 import Preloader from "../../Common/Preloader/Preloader";
 import { WithAuthRedirect } from "../../../HOC/WithAuthRedirect";
 import { compose } from "redux";
-import { getCurrentPage, getFollowingProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../../redux/friends-selectors";
+import { getCurrentPage, getFilterFriends, getFollowingProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../../redux/friends-selectors";
 import { FriendsContainerPropsType, FriendsContainerStatePropsType } from "../../../types/FriendsTypes/FriendsTypesComponent";
 import { AppStateType } from "../../../redux/redux-store";
+import { FriendsFilterTermType } from "../../../types/FriendsTypes/FriendsTypes";
 
 const FriendsContainer: React.FC<FriendsContainerPropsType> = (props) => {
 
     useEffect(() => {
-        props.getUsers(props.currentPage, props.pageSize)
+        props.getUsers(props.currentPage, props.pageSize, props.filter)
     }, [])
 
     const setCurrentPage = (p: number) => {
         props.setCurrentPage(p)
-        props.getUsers(p, props.pageSize)
+        props.getUsers(p, props.pageSize, props.filter)
+    }
+
+    const onFilterChanged = (filter: FriendsFilterTermType) => {
+        props.getUsers(1, props.pageSize, filter)
     }
 
     return (
@@ -30,11 +35,12 @@ const FriendsContainer: React.FC<FriendsContainerPropsType> = (props) => {
                 users={props.users}
                 followUser={props.followUser}
                 unfollowUser={props.unfollowUser}
-                followingProgress={props.followingProgress} />}
+                followingProgress={props.followingProgress}
+                onFilterChanged = {onFilterChanged} />}
         </div>
     )
-
 }
+
 
 const mapStateToProps = (state: AppStateType): FriendsContainerStatePropsType => {
     return {
@@ -43,7 +49,8 @@ const mapStateToProps = (state: AppStateType): FriendsContainerStatePropsType =>
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingProgress: getFollowingProgress(state)
+        followingProgress: getFollowingProgress(state),
+        filter: getFilterFriends(state)
     }
 }
 

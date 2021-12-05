@@ -17,8 +17,8 @@ export const friendsAPI = {
     unFollowUser(userID: number) {
         return instance.delete<ResponseType>(`follow/${userID}`).then(data => data.data)
     },
-    getUsers(currentPage: number, pageSize: number) {
-        return instance.get<FriendsApiGetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(data => data.data)
+    getUsers(currentPage: number, pageSize: number, term: string = '', friend: boolean | null = null) {
+        return instance.get<FriendsApiGetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`)).then(data => data.data)
     }
 }
 

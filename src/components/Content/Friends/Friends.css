@@ -22,4 +22,13 @@
 .pagination-pages__value.selected{
     background-color: rgba(0, 0, 0, 0.308);
 }
+.friends__form-search {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    background-color: #b7d4d6ad;
+}
 
